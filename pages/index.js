@@ -2,6 +2,7 @@ import Head from 'next/head'
 import useSWR from 'swr'
 
 // Components
+import Sidebar from './components/Sidebar';
 import ItemPositive from './components/ItemPositive';
 import ItemNegative from './components/ItemNegative';
 
@@ -18,14 +19,6 @@ export default function Home(props) {
 
   return (
     <>
-      <header className="flex justify-between items-center h-12 px-4">
-        <a href="#" className="text-white">
-          <span className="font-medium">altcoin</span>deck
-        </a>
-        <div>
-          <span>Last Update: {new Date().getTime()}</span>
-        </div>
-      </header>
       {
         (!data && error) &&
         <div className="flex">
@@ -54,16 +47,19 @@ export default function Home(props) {
       }
       {
         (data && !error) &&
-          <section className="grid grid-cols-3 2xl:grid-cols-4 gap-2 p-2">
-          {
-            data.map((cat, index) => 
-              cat.market_cap_change_24h >= 0 ?
-                <ItemPositive cat={cat} index={index} />
-              :
-                <ItemNegative cat={cat} index={index} />
-            )
-          }
-        </section>
+          <div className="grid grid-cols-3">
+            <Sidebar data={data} />
+            <div className="col-span-2 grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-2 p-2">
+              {
+                data.map((cat, index) => 
+                  cat.market_cap_change_24h >= 0 ?
+                    <ItemPositive cat={cat} index={index} />
+                  :
+                    <ItemNegative cat={cat} index={index} />
+                )
+              }
+            </div>
+          </div>
       }
     </>
   )

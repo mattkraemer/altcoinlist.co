@@ -2,9 +2,9 @@ import Head from 'next/head'
 import useSWR from 'swr'
 
 // Components
-import Sidebar from './components/Sidebar';
-import ItemPositive from './components/ItemPositive';
-import ItemNegative from './components/ItemNegative';
+import Sidebar from '../components/Sidebar';
+import ItemPositive from '../components/ItemPositive';
+import ItemNegative from '../components/ItemNegative';
 
 async function getStaticProps() {
   // `getStaticProps` is invoked on the server-side,

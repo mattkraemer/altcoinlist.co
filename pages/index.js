@@ -18,7 +18,7 @@ export default function Home(props) {
   const { data, error } = useSWR('https://api.coingecko.com/api/v3/coins/categories', fetcher, { initialData: props.posts })
 
   return (
-    <>
+    <div className="container mx-auto">
       {
         (!data && error) &&
         <div className="flex">
@@ -61,6 +61,6 @@ export default function Home(props) {
             </div>
           </div>
       }
-    </>
+    </div>
   )
 }

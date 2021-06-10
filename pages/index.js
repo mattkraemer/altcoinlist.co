@@ -47,9 +47,9 @@ export default function Home(props) {
       }
       {
         (data && !error) &&
-          <div className="grid grid-cols-3">
+          <div className="grid grid-cols-3 2xl:grid-cols-4">
             <Sidebar data={data} />
-            <div className="col-span-2 grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-2 p-2">
+            <div className="col-span-2 2xl:col-span-3 grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-2 p-2">
               {
                 data.map((cat, index) => 
                   cat.market_cap_change_24h >= 0 ?

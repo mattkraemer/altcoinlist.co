@@ -1,12 +1,20 @@
 import Head from 'next/head'
 import useSWR from 'swr'
 
-var numeral = require('numeral');
+// Components
+import ItemPositive from './components/ItemPositive';
+import ItemNegative from './components/ItemNegative';
 
-const fetcher = (...args) => fetch(...args).then(res => res.json())
+async function getStaticProps() {
+  // `getStaticProps` is invoked on the server-side,
+  // so this `fetcher` function will be executed on the server-side.
+  const posts = await fetcher('https://api.coingecko.com/api/v3/coins/categories')
+  return { props: { posts } }
+}
 
-export default function Home() {
-  const { data, error } = useSWR('https://api.coingecko.com/api/v3/coins/categories', fetcher)
+export default function Home(props) {
+  const fetcher = (...args) => fetch(...args).then(res => res.json())
+  const { data, error } = useSWR('https://api.coingecko.com/api/v3/coins/categories', fetcher, { initialData: props.posts })
 
   return (
     <>
@@ -19,7 +27,7 @@ export default function Home() {
         </div>
       </header>
       {
-        error &&
+        (!data && error) &&
         <div className="flex">
           <div className="m-auto my-20 text-black text-opacity-50 bg-black bg-opacity-10 rounded-xl p-12">
             <svg className="h-24 w-24 stroke-current text mx-auto mb-4" viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
@@ -34,7 +42,7 @@ export default function Home() {
         </div>
       }
       {
-        !data &&
+        (!data && !error) &&
         <div className="flex">
           <div className="m-auto my-20 text-black text-opacity-50 bg-black bg-opacity-10 rounded-xl p-12">
             <svg className="h-24 w-24 stroke-current text mx-auto mb-4 animate-spin" viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
@@ -45,52 +53,15 @@ export default function Home() {
         </div>
       }
       {
-        data &&
+        (data && !error) &&
           <section className="grid grid-cols-3 2xl:grid-cols-4 gap-2 p-2">
           {
-            data.map((cat, index) => (
-              <div key={index} className="group transition bg-black bg-opacity-25 rounded border border-gray-800 hover:border-teal-900 hover:shadow-lg overflow-hidden">
-                <header className="py-2 px-4 bg-black bg-opacity-25 flex justify-between items-center">
-                  <h1 className="font-semibold text-white">{cat.name}</h1>
-                  <span className="rounded-full h-3 w-3 bg-teal-600 border-2 border-teal-400 opacity-50 group-hover:opacity-100 group-hover:animate-pulse" />
-                </header>
-                <div className="grid grid-cols-3 gap-2 py-2 px-4">
-                  <div>
-                    <label className="text-xs">Market Cap</label>
-                    <span className="text-xs text-gray-200 truncate block">{numeral(cat.market_cap).format('$0,0.00')}</span>
-                  </div>
-                  <div>
-                    <label className="text-xs">Market Cap Change</label>
-                    {
-                      cat.market_cap_change_24h >= 0 ?
-                      <span className="text-xs text-teal-400 truncate flex gap-1 items-center">
-                        <svg viewBox="0 0 140 140" className="stroke-current h-3 w-3" xmlns="http://www.w3.org/2000/svg">
-                          <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M124.08 21.875l-15.86 61.28a46.667 46.667 0 01-45.18 34.97H2.918" stroke-width="5.83333"/>
-                            <path d="M103.023 34.877l21.058-13.002 13.002 21.058" stroke-width="5.83333"/>
-                          </g>
-                        </svg>
-                        {numeral(cat.market_cap_change_24h).format('$0,0.00')}
-                      </span>
-                      :
-                      <span className="text-xs text-red-400 truncate flex gap-1 items-center">
-                        <svg viewBox="0 0 140 140" className="stroke-current h-3 w-3" xmlns="http://www.w3.org/2000/svg">
-                          <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M124.08 21.875l-15.86 61.28a46.667 46.667 0 01-45.18 34.97H2.918" stroke-width="5.83333"/>
-                            <path d="M103.023 34.877l21.058-13.002 13.002 21.058" stroke-width="5.83333"/>
-                          </g>
-                        </svg>
-                        {numeral(cat.market_cap_change_24h).format('$0,0.00')}
-                      </span>
-                    }
-                  </div>
-                  <div>
-                    <label className="text-xs">Volume 24h</label>
-                    <span className="text-xs text-gray-200 truncate block">{numeral(cat.volume_24h).format('$0,0.00')}</span>
-                  </div>
-                </div>
-              </div>
-            ))
+            data.map((cat, index) => 
+              cat.market_cap_change_24h >= 0 ?
+                <ItemPositive cat={cat} index={index} />
+              :
+                <ItemNegative cat={cat} index={index} />
+            )
           }
         </section>
       }

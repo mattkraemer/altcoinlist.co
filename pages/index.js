@@ -24,9 +24,10 @@ export default function Home() {
       <section className="grid grid-cols-3 gap-2 p-2">
         {
           data.map((cat, index) => (
-            <div key={index} className="transition bg-black bg-opacity-25 rounded border border-gray-800 hover:shadow-lg">
-              <header className="py-2 px-4 bg-black bg-opacity-25">
+            <div key={index} className="group transition bg-black bg-opacity-25 rounded border border-gray-800 hover:shadow-lg">
+              <header className="py-2 px-4 bg-black bg-opacity-25 flex justify-between items-center">
                 <h1 className="font-semibold text-white">{cat.name}</h1>
+                <span className="rounded-full h-3 w-3 bg-teal-600 border-2 border-teal-400 opacity-50 group-hover:opacity-100 group-hover:animate-pulse" />
               </header>
               <div className="grid grid-cols-3 gap-2 py-2 px-4">
                 <div>

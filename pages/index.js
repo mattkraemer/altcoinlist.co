@@ -1,6 +1,8 @@
 import Head from 'next/head'
 import useSWR from 'swr'
 
+var numeral = require('numeral');
+
 const fetcher = (...args) => fetch(...args).then(res => res.json())
 
 export default function Home() {
@@ -29,15 +31,15 @@ export default function Home() {
               <div className="grid grid-cols-3 gap-2 py-2 px-4">
                 <div>
                   <label className="text-xs">Market Cap</label>
-                  <span className="text-xs text-gray-200 truncate block">{cat.market_cap}</span>
+                  <span className="text-xs text-gray-200 truncate block">{numeral(cat.market_cap).format('$0,0.00')}</span>
                 </div>
                 <div>
                   <label className="text-xs">Market Cap Change</label>
-                  <span className="text-xs text-gray-200 truncate block">{cat.market_cap_change_24h}</span>
+                  <span className="text-xs text-gray-200 truncate block">{numeral(cat.market_cap_change_24h).format('$0,0.00')}</span>
                 </div>
                 <div>
                   <label className="text-xs">Volume 24h</label>
-                  <span className="text-xs text-gray-200 truncate block">{cat.volume_24h}</span>
+                  <span className="text-xs text-gray-200 truncate block">{numeral(cat.volume_24h).format('$0,0.00')}</span>
                 </div>
               </div>
             </div>

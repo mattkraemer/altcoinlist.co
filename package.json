@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "next": "10.x",
+    "numeral": "^2.0.6",
     "react": "17.x",
     "react-dom": "17.x",
     "swr": "^0.5.6"

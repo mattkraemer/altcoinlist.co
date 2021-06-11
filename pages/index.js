@@ -22,7 +22,7 @@ export default function Home(props) {
       {
         (!data && error) &&
         <div className="flex">
-          <div className="m-auto my-20 text-black text-opacity-50 bg-black bg-opacity-10 rounded-xl p-12">
+          <div className="m-auto my-20 text-gray-400 text-opacity-50 bg-black bg-opacity-10 rounded-xl p-12">
             <svg className="h-24 w-24 stroke-current text mx-auto mb-4" viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
               <g fill="none" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M4.142 67.742l16.257 24.22 18.696-22.388m96.722 23.27l-16.251-24.227-18.702 22.395" stroke-width="5.83333"/>
@@ -37,7 +37,7 @@ export default function Home(props) {
       {
         (!data && !error) &&
         <div className="flex">
-          <div className="m-auto my-20 text-black text-opacity-50 bg-black bg-opacity-10 rounded-xl p-12">
+          <div className="m-auto my-20 text-gray-44 text-opacity-50 bg-black bg-opacity-10 rounded-xl p-12">
             <svg className="h-24 w-24 stroke-current text mx-auto mb-4 animate-spin" viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
               <path d="M102.083 43.738a17.5 17.5 0 1035 0 17.5 17.5 0 10-35 0zM64.167 20.405a14.583 14.583 0 1029.166 0 14.583 14.583 0 10-29.166 0zM23.333 32.072a14.583 14.583 0 1029.167 0 14.583 14.583 0 10-29.167 0zm-17.5 35a11.667 11.667 0 1023.334 0 11.667 11.667 0 10-23.334 0zm8.75 35a11.667 11.667 0 1023.334 0 11.667 11.667 0 10-23.334 0zm32.084 23.333a8.75 8.75 0 1017.5 0 8.75 8.75 0 10-17.5 0zm34.27.852a5.833 5.833 0 1011.667 0 5.833 5.833 0 10-11.667 0z" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="5.83333"/>
             </svg>

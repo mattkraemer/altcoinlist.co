@@ -1,0 +1,8 @@
+@tailwind base;
+
+body {
+  @apply bg-gray-900 antialiased text-gray-400 border-t-4 border-teal-600;
+}
+
+@tailwind components;
+@tailwind utilities;

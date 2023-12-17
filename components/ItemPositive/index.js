@@ -18,7 +18,7 @@ export default function ItemPositive({ cat, index }) {
             <svg viewBox="0 0 140 140" className="stroke-current h-3 w-3 transform -rotate-90" xmlns="http://www.w3.org/2000/svg">
               <path d="M115.016 114.91L23.333 23.323m93.334.011v87.5a5.833 5.833 0 01-5.834 5.834h-87.5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="5.83333"/>
             </svg>
-            {cat.market_cap_change_24h.toFixed(2)} %
+            {/* {cat.market_cap_change_24h.toFixed(2)} % */}
           </span>
         </div>
         <div>
